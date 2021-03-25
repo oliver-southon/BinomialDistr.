@@ -47,15 +47,19 @@ window = sg.Window('Binomial Calculator', layout) #makes window
 
 while True:
     event, values = window.read()
-    n = int(values['-N-'])
-    p = float(values['-P-'])
-    k = int(values['-K-'])
-    op = [ key for key in r_keys if values[key]][0]
+
+    n = values['-N-']
+    p = values['-P-']
+    k = values['-K-']
+    op = [ key for key in r_keys if values[key]][0] 
 
     if event in (None, 'Exit'):
         window.close()
-    if n>0 and p>0 and k>0 and op>0:
-        print(calcProb(n,p,k,op))
+    if event == 'Calculate':
+        try:
+            print(calcProb(int(n),float(p),int(k),op))
+        except:
+            print("Missing values")
     if event == 'Clear':
         window.FindElement('_output_').Update('') #clears element
 
